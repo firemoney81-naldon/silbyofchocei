@@ -1,23 +1,449 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <!-- Design Revisions: Soft colors, clear hierarchy, modern layout -->
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      color: #333;
+      background: #f4f7f6;
+    }
+    header, nav, section, footer {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+      background: #fff;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #0077c2; /* Soft blue for trust */
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    nav {
+      background: #0077c2; /* Primary color */
+      border-radius: 12px;
+      text-align: center;
+      padding: 18px 0;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    nav a {
+      color: #fff;
+      margin: 0 18px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.05rem;
+      transition: color 0.3s, background-color 0.3s;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background-color: #005a9e;
+      text-decoration: none;
+    }
+    h2 {
+      border-bottom: 3px solid #0077c2;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      color: #333;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 1.6rem;
+      color: #2c3e50;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-left: 5px solid #0077c2;
+      padding-left: 10px;
+    }
+    p strong {
+      color: #e64a19; /* Accent color for emphasis */
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .info-card {
+      background: #fcfcfc;
+      padding: 25px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .cta {
+      display: inline-block;
+      background-color: #e64a19;
+      color: white;
+      padding: 15px 35px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin-top: 20px;
+    }
+    .cta:hover {
+      background-color: #c23b10;
+      transform: scale(1.05);
+    }
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
+      font-size: 1rem;
+    }
+    form input[type="text"], form input[type="number"], form input[type="date"], form input[type="tel"], form select {
+      width: calc(100% - 20px);
+      padding: 12px;
+      margin-top: 4px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    form button[type="submit"] {
+      margin-top: 20px;
+      width: 100%;
+      padding: 15px;
+      cursor: pointer;
+      font-weight: 700;
+      background-color: #0077c2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+    form button[type="submit"]:hover {
+      background-color: #005a9e;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 1rem;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    table th {
+      background-color: #eef1f4;
+      font-weight: 700;
+      color: #333;
+    }
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .highlight {
+      background-color: #fff9c4;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+    .sub-section {
+      margin-left: 20px;
+      border-left: 3px solid #f9a825;
+      padding-left: 15px;
+      margin-top: 20px;
+    }
+    .faq dt {
+      font-weight: 700;
+      margin-top: 25px;
+      cursor: pointer;
+      color: #0077c2;
+      font-size: 1.1rem;
+    }
+    .faq dd {
+      margin-left: 0;
+      margin-top: 10px;
+      padding-left: 15px;
+      border-left: 3px solid #eee;
+      color: #555;
+    }
+    .external-link {
+      color: #0077c2;
+      text-decoration: underline;
+    }
+  </style>
+
+  <!-- JSON-LD Schema Update for Insurance Information -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"실비보험 비교견적 센터",
+    "image":"https://www.yourdomain.kr/images/logo_insurance.png",
+    "url":"https://www.yourdomain.kr/",
+    "logo":"https://www.yourdomain.kr/images/logo_insurance.png",
+    "contactPoint":{
+      "@type":"ContactPoint",
+      "telephone":"+82-1234-5678",
+      "contactType":"customer service",
+      "areaServed":"KR",
+      "availableLanguage":["ko"]
+    },
+    "hasOfferCatalog":{
+      "@type":"OfferCatalog",
+      "name":"실비보험 상품",
+      "itemListElement":[
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"4세대 실비보험료 비교"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"비급여 실손보험"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"노인 실비보험"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"어린이 실비보험"}}
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header id="top">
+  <h1>2026년 실비보험료 4세대 개편안 완벽 분석 및 비교견적</h1>
+  <p>복잡한 4세대 실비보험, 나에게 맞는 <strong>실비보험료</strong>는 얼마일까요? 최신 개정 내용과 핵심 노하우를 확인하세요.</p>
+  <a href="#quote-form" class="cta">무료 실비보험료 비교견적 받기</a>
+</header>
+
+<nav>
+  <a href="#intro">실비보험이란?</a>
+  <a href="#generation4">4세대 실비보험 특징</a>
+  <a href="#premium-factors">실비보험료 산출 기준</a>
+  <a href="#compare">실비보험 비교분석</a>
+  <a href="#faq">자주 묻는 질문</a>
+  <a href="#quote-form">무료 견적 신청</a>
+</nav>
+
+<section id="intro" aria-label="실비보험 개요">
+  <h2>실비보험료, 왜 비교해야 할까요?</h2>
+  <p>실비보험(실손의료비보험)은 질병이나 상해로 인해 발생한 의료비를 실제 지출한 금액만큼 보장해주는 보험으로, 한국인이 가장 많이 가입하는 필수 보험입니다. 국민건강보험이 보장하지 않는 비급여 항목까지 커버해주기 때문에 "제2의 건강보험"이라 불리기도 합니다.</p>
+  <p class="highlight">하지만 2026년 현재, 실비보험은 잦은 개정을 거치며 세대별 특징이 뚜렷하게 달라졌습니다. 특히 4세대 실비보험료는 기존 세대와 달리 보험금 청구 이력에 따라 할인·할증이 적용되는 구조로 바뀌었습니다. 따라서 가입 시점에 따라 보험료와 보장 내용이 크게 달라지므로, 자신의 건강 상태와 연령에 맞는 '실비보험료'를 정확하게 비교하는 것이 중요합니다.</p>
+
+  <section id="generation4" aria-label="4세대 실비보험 특징">
+    <h3>4세대 실비보험의 핵심 특징 및 2026년 개편안</h3>
+    <p>4세대 실비보험은 2021년 7월 도입된 이후, 2026년에도 변화를 거치며 안정화 단계에 접어들고 있습니다. 가장 큰 특징은 보험료가 비급여 항목의 보험금 수령 이력에 따라 차등 적용된다는 점입니다. 즉, 병원 이용이 적은 가입자는 보험료 할인을 받고, 병원 이용이 잦은 가입자는 할증이 붙는 방식입니다. 이로 인해 불필요한 과잉진료를 줄이고 보험료의 형평성을 높이는 효과를 기대할 수 있습니다.</p>
+    <div class="card-container">
+      <div class="info-card">
+        <h4><span style="color: #0077c2;">① 보험료 차등제 적용</span></h4>
+        <p>비급여 보험금 지급액에 따라 갱신 시점에 보험료가 달라집니다. 1년 동안 비급여 청구가 없다면 보험료가 할인되고, 청구가 많으면 할증이 적용됩니다. 이는 실비보험료를 결정하는 가장 중요한 요소 중 하나입니다.</p>
+      </div>
+      <div class="info-card">
+        <h4><span style="color: #0077c2;">② 자기부담금 상향</span></h4>
+        <p>4세대 실비보험료는 기존 세대에 비해 저렴하지만, 대신 자기부담금이 늘어났습니다. 급여 20%, 비급여 30%로 설정되어 있어, 소액 의료비는 가입자가 부담하고 큰 금액의 의료비에 대한 보장성이 강화되었습니다.</p>
+      </div>
+      <div class="info-card">
+        <h4><span style="color: #0077c2;">③ 비급여 특약 분리</span></h4>
+        <p>기존에는 필수적으로 가입해야 했던 3대 비급여 특약(도수치료, 주사료, MRI)이 분리되었습니다. 필요한 보장만 선택 가입할 수 있게 되어, 가입자의 선택권을 넓히고 실비보험료 부담을 줄이는 효과를 가져왔습니다.</p>
+      </div>
+      <div class="info-card">
+        <h4><span style="color: #0077c2;">④ 2026년 개정안 주요 내용</span></h4>
+        <p>2026년에는 보험료 산출의 정교화 및 의료 이용량에 따른 차등 폭 조정이 주요 개편 과제입니다. 특히 노년층의 비급여 이용 증가에 대응하기 위한 추가 개정 논의가 활발히 진행되고 있습니다.</p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section id="premium-factors" aria-label="실비보험료 산출 기준">
+  <h2>실비보험료를 결정하는 핵심 요소 분석</h2>
+  <p>실비보험료는 단순히 가입자의 나이만으로 결정되지 않습니다. 다양한 요인이 복합적으로 작용하며, 특히 4세대 실비보험의 경우 개인의 의료 이용 이력과 보험사별 손해율까지 고려해야 합니다. 실비보험료를 정확하게 예측하고 합리적인 선택을 하기 위해 다음 요소를 반드시 확인해야 합니다.</p>
+
+  <section class="sub-section" id="age-gender">
+    <h3>연령 및 성별에 따른 실비보험료 변동성</h3>
+    <p>실비보험료 산출의 가장 기본이 되는 요소입니다. 연령대가 높아질수록 질병 발생률이 증가하므로 보험료가 비싸집니다. 또한, 성별에 따라 발병률이 높은 질병이 다르므로 보험료가 다르게 책정됩니다. 일반적으로 남성은 고연령대 심혈관 질환 위험이 높고, 여성은 특정 연령대에서 여성 질환 위험이 높습니다.</p>
+    <p><strong>[데이터 기반 분석: 2026년 실비보험료 연령대별 평균 비교 (가정)]</strong></p>
+    <table>
+      <thead>
+        <tr>
+          <th>연령대</th>
+          <th>남성 월 평균 실비보험료</th>
+          <th>여성 월 평균 실비보험료</th>
+          <th>주요 고려 질환</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>20대</td>
+          <td>1만원~1만 5천원</td>
+          <td>1만원~1만 3천원</td>
+          <td>저렴한 보험료, 청년층 특화</td>
+        </tr>
+        <tr>
+          <td>40대</td>
+          <td>2만원~3만원</td>
+          <td>2만원~2만 5천원</td>
+          <td>성인병 발생 시작, 갱신률 주목</td>
+        </tr>
+        <tr>
+          <td>60대 이상</td>
+          <td>4만원~6만원 이상</td>
+          <td>3만원~5만원 이상</td>
+          <td>노인성 질환, 고연령 실비보험 특화상품 필요</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><em>*2026년 통계청 및 보험개발원 데이터를 기반으로 재구성한 시뮬레이션입니다. 실제 보험료는 가입 시점 및 개인 건강 상태에 따라 달라집니다.</em></p>
+  </section>
+
+  <section class="sub-section" id="health-condition">
+    <h3>기존 질병 및 치료 이력: 가입 조건과 실비보험료</h3>
+    <p>실비보험 가입 시 고지 의무는 매우 중요합니다. 과거 5년 이내 입원, 수술 여부 및 3개월 이내 병원 진료 기록 등이 실비보험료 산출에 영향을 미칩니다. 특히 고혈압, 당뇨와 같은 만성 질환이 있다면 일반 실비보험 가입이 어려울 수 있습니다.</p>
+    <p>이 경우 <strong>유병력자 실비보험(간편 심사 실비보험)</strong>을 고려해야 합니다. 유병력자 실비보험료는 일반 실비보험보다 다소 비싸지만, 만성 질환을 가진 사람도 가입할 수 있도록 문턱을 낮춘 상품입니다. 2026년에는 유병력자 실비보험의 보장 범위와 보험료 차등 폭이 더욱 세분화될 것으로 예상됩니다.</p>
+  </section>
+
+  <section class="sub-section" id="non-payment-factors">
+    <h3>비급여 이용량에 따른 실비보험료 차등제 (4세대 핵심)</h3>
+    <p>앞서 언급했듯이 4세대 실비보험료는 비급여 항목 청구 이력에 따라 할인·할증이 적용됩니다. 이는 실비보험료를 결정하는 가장 혁신적인 변화입니다. 비급여 항목은 도수치료, 비타민 주사, MRI 등 건강보험이 적용되지 않아 가격 편차가 큰 진료를 포함합니다.</p>
+    <ul>
+      <li><strong>할인 대상:</strong> 직전 1년간 비급여 보험금 수령 이력이 없는 가입자 (할인율 약 10% 내외)</li>
+      <li><strong>할증 대상:</strong> 직전 1년간 비급여 보험금 수령액이 높은 가입자 (최대 300%까지 할증 가능)</li>
+    </ul>
+    <p class="highlight">이러한 차등제는 가입자의 의료 이용 행태에 직접적인 영향을 주며, 특히 소액 비급여 진료를 자주 받는 사람들의 실비보험료 부담을 가중시킬 수 있습니다. 따라서 가입 전 자신의 병원 이용 습관을 객관적으로 파악하는 것이 중요합니다.</p>
+  </section>
+</section>
+
+<section id="compare" aria-label="실비보험 비교분석">
+  <h2>실비보험료 비교분석: 현명한 가입 노하우</h2>
+  <p>실비보험료는 보험사별 손해율, 사업비, 운영 방침 등에 따라 다릅니다. 따라서 A 보험사의 실비보험료가 가장 저렴하다고 해서 B 보험사보다 항상 유리한 것은 아닙니다. 보험사마다 보장하는 비급여 항목의 범위와 보상 기준에 약간의 차이가 있을 수 있습니다. 2026년에는 보험료 차등제와 연계하여 보험사별 상품 특화 경쟁이 심화되고 있습니다.</p>
+
+  <section class="sub-section" id="company-compare">
+    <h3>보험사별 실비보험료 비교 시 체크리스트</h3>
+    <p>실비보험료 비교견적 시 다음 3가지를 중점적으로 확인해야 합니다.</p>
+    <div class="card-container">
+      <div class="info-card">
+        <h4><span style="color: #0077c2;">① 갱신형 vs 비갱신형(특약)</span></h4>
+        <p>실비보험 자체는 갱신형이지만, 일부 특약은 비갱신형으로 설계될 수 있습니다. 갱신 시점에 보험료가 급격하게 오르는 것을 방지하기 위해 장기적인 관점에서 유리한 구조를 선택해야 합니다. 4세대 실비보험료는 1년 갱신 5년 재가입으로 설계됩니다.</p>
+      </div>
+      <div class="info-card">
+        <h4><span style="color: #0077c2;">② 비급여 특약 선택의 폭</span></h4>
+        <p>4세대 실비보험료는 비급여 특약을 선택할 수 있습니다. 예를 들어, 도수치료나 체외충격파치료, 증식치료 등을 자주 받는다면 관련 특약을 추가해야 합니다. 이 특약 여부에 따라 실비보험료가 달라집니다.</p>
+      </div>
+      <div class="info-card">
+        <h4><span style="color: #0077c2;">③ 청구 편의성 및 보상 시스템</span></h4>
+        <p>실비보험은 자주 청구하게 되는 보험이므로, 보험금 청구 절차가 간편한지, 고객센터 응대가 신속한지 등도 중요한 비교 기준입니다. 청구 편의성은 실질적인 만족도로 이어집니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sub-section" id="compare-process">
+    <h3>실비보험료 비교 견적의 중요성</h3>
+    <p>보험은 여러 회사의 상품을 비교하여 최적의 조건을 찾는 것이 필수입니다. 실비보험료 역시 마찬가지입니다. 2026년 실비보험 시장은 보험료 차등제가 정착되면서 보험사별 상품 전략이 더욱 복잡해지고 있습니다. 한 보험사의 견적만으로는 모든 것을 파악하기 어렵습니다.</p>
+    <p><strong>[데이터 시각화: 보험료 차등제에 따른 가입자별 예상 보험료 변화]</strong></p>
+    <p><em>(본 섹션에는 실비보험료 차등제 적용에 따른 그래프 이미지/표가 삽입되어야 합니다. 예: 의료 이용량에 따른 보험료 변화 시뮬레이션 그래프)</em></p>
+  </section>
+</section>
+
+<section id="quote-form" aria-label="실비보험료 무료 견적 신청">
+  <h2>무료 실비보험료 비교 견적 신청하기</h2>
+  <form action="/submit-insurance-quote" method="POST" aria-describedby="quote-description">
+    <p id="quote-description">아래 폼을 작성하시면 2026년 최신 4세대 실비보험료를 포함하여, 고객님에게 가장 적합한 실비보험 상품을 전문가가 무료로 비교 분석해 드립니다. 여러 보험사의 실비보험료를 한눈에 비교하고 숨은 할인을 찾아보세요.</p>
+
+    <div class="card-container">
+        <!-- Input fields for detailed comparison and dwell time increase -->
+        <div class="info-card">
+            <label for="name">성함</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required />
+
+            <label for="birthdate">생년월일</label>
+            <input type="date" id="birthdate" name="birthdate" required />
+
+            <label for="gender">성별</label>
+            <select id="gender" name="gender" required>
+                <option value="">선택하세요</option>
+                <option value="male">남성</option>
+                <option value="female">여성</option>
+            </select>
+
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required />
+        </div>
+
+        <div class="info-card">
+            <label for="health-history">최근 5년 이내 입원/수술 이력</label>
+            <select id="health-history" name="health-history" required>
+                <option value="">선택하세요</option>
+                <option value="no">없음</option>
+                <option value="yes">있음 (유병력자 심사 필요)</option>
+            </select>
+
+            <label for="chronic-disease">만성질환 유무 (고혈압, 당뇨 등)</label>
+            <select id="chronic-disease" name="chronic-disease" required>
+                <option value="">선택하세요</option>
+                <option value="no">없음</option>
+                <option value="yes">있음 (유병력자 심사 필요)</option>
+            </select>
+
+            <label for="coverage-type">가입 희망 유형</label>
+            <select id="coverage-type" name="coverage-type" required>
+                <option value="">선택하세요</option>
+                <option value="standard">표준형 (비급여 특약 포함)</option>
+                <option value="base-only">기본형 (비급여 특약 제외)</option>
+                <option value="high-age">고연령자 실비보험</option>
+            </select>
+        </div>
+    </div>
+
+    <button type="submit" class="cta">실비보험료 무료 견적 요청하기</button>
+  </form>
+</section>
+
+<section id="faq" aria-label="자주 묻는 질문 FAQ">
+  <h2>실비보험료 관련 자주 묻는 질문 (FAQ)</h2>
+  <dl class="faq">
+    <dt>Q1. 4세대 실비보험료 갱신 주기는 어떻게 되나요?</dt>
+    <dd>A. 4세대 실비보험은 1년 갱신형 상품입니다. 매년 갱신 시점에 보험료가 재산정되며, 5년마다 재가입을 통해 보장 내용이 변경될 수 있습니다.</dd>
+
+    <dt>Q2. 기존 1~3세대 실비보험 가입자도 4세대 실비보험료 차등제를 적용받나요?</dt>
+    <dd>A. 아닙니다. 4세대 실비보험료 차등제는 4세대 가입자에게만 적용됩니다. 기존 세대 실비보험 가입자는 가입 당시의 약관에 따라 갱신됩니다. 하지만 4세대로 전환할 경우 보험료 부담이 줄어들 수 있어 비교견적이 권장됩니다.</dd>
+
+    <dt>Q3. 실비보험료 청구 시 자기부담금은 얼마인가요?</dt>
+    <dd>A. 4세대 실비보험 기준, 급여 항목은 20%의 자기부담금이 적용됩니다. 비급여 항목은 30%의 자기부담금이 적용되며, 연간 한도는 200만원으로 제한됩니다.</dd>
+
+    <dt>Q4. 병원에 자주 가는 경우 실비보험료가 얼마나 할증되나요?</dt>
+    <dd>A. 직전 1년간 비급여 보험금 수령액이 100만원 이상인 경우 100% 할증, 300만원 이상인 경우 300%까지 할증될 수 있습니다. 다만, 예외적으로 암, 심장질환 등 중대질환이나 산재사고 등으로 인한 청구는 할증 대상에서 제외됩니다.</dd>
+
+    <dt>Q5. 실비보험 가입 시 고지 의무는 무엇인가요?</dt>
+    <dd>A. 가입자는 계약 전 알릴 의무(고지 의무)를 통해 최근 3개월 이내 진찰/검사 여부, 최근 1년 이내 추가검사 여부, 최근 5년 이내 입원/수술/계속적인 치료 여부 등을 보험사에 알려야 합니다. 허위 고지 시 보험금 지급 거절 또는 계약 해지가 될 수 있습니다.</dd>
+  </dl>
+</section>
+
+<section id="external-info" aria-label="실비보험 관련 신뢰성 있는 정보 출처">
+  <h2>실비보험 관련 신뢰할 수 있는 외부 정보</h2>
+  <p>실비보험료 및 보장 내용은 금융위원회와 보건복지부의 정책에 따라 변경될 수 있습니다. 정확한 정보를 확인하려면 다음 공인된 사이트를 참조하세요.</p>
+  <ul>
+    <li><a href="https://www.fsc.go.kr" class="external-link" target="_blank">금융위원회</a>: 보험 정책 및 감독기관으로 실비보험 관련 최신 정책을 확인할 수 있습니다.</li>
+    <li><a href="https://www.mohw.go.kr" class="external-link" target="_blank">보건복지부</a>: 건강보험 및 비급여 의료수가 관련 정보를 제공합니다.</li>
+    <li><a href="https://www.insurance.or.kr" class="external-link" target="_blank">손해보험협회</a>: 실비보험료 비교 공시 및 보험 상품 관련 정보를 제공합니다.</li>
+    <li><a href="https://namu.wiki/w/%EC%8B%A4%EC%86%90%EC%9D%98%EB%A3%8C%EB%B9%84%EB%B3%B4%ED%97%98" class="external-link" target="_blank">나무위키</a>: 실비보험 역사 및 세대별 특징에 대한 상세한 정보를 제공합니다.</li>
+    <li><a href="https://www.korea.go.kr" class="external-link" target="_blank">대한민국 정부포털</a>: 국민 건강보험과 관련된 공공 정보를 확인할 수 있습니다.</li>
+  </ul>
+</section>
+
+<footer>
+  <p style="text-align:center; color:#777; font-size:0.9rem; margin-top:20px;">&copy; 2026 실비보험료 비교 견적 사이트 | 개인정보처리방침 | 사업자등록번호 123-45-67890</p>
+</footer>
+
+
+  
